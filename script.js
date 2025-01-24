@@ -27,21 +27,35 @@ function créerLigneGauche(longueurSapin, longueurTotale) {
 	return (line);
 }
 
-function créerPremièreLigne(hauteur) {
-	let line = ' '
+function créerPremièreLigne(hauteur, espacement) {
+	let line = ajouterEspaces(espacement) + ' ';
 	for ( ; hauteur > 1; hauteur--)
 		line += ' ';
 	line += '+';
 	return (line);
 }
 
-function afficherPointeSapin(hauteur) {
-	console.log(créerPremièreLigne(hauteur));
+function ajouterEspaces(espacement) {
+	let line = ''
+	for (let i = 0; i < espacement; i++)
+		line += ' '
+	return line;
+}
+
+function afficherEtage(hauteur, pointe_offset, espacement) {
+	if (pointe_offset == 0)
+		console.log(créerPremièreLigne(hauteur, espacement));
 	let line;
-	for (let i = 1; i <= hauteur; i++) {
-		line = créerLigneGauche(i, hauteur) + '|' + créerLigneDroite(i - 1);
+	for (let i = 1 + pointe_offset ; i <= hauteur + pointe_offset; i++) {
+		line = ajouterEspaces(espacement) + créerLigneGauche(i, hauteur + pointe_offset) + '|' + créerLigneDroite(i - 1);
 		console.log(line);
 	}
 }
 
-afficherPointeSapin(5);
+function afficherSapin(étages, hauteurEtages) {
+	for (let i = 0; i < étages; i++) {
+		afficherEtage(hauteurEtages, i, hauteurEtages - i);
+	}
+}
+
+afficherSapin(3, 3);
