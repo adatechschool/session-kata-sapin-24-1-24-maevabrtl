@@ -42,12 +42,37 @@ function ajouterEspaces(espacement) {
 	return line;
 }
 
+function putRandomDecorX(line) {
+    return line.split('').map(element => {
+        if (Math.random() > 0.9 && element == '*') {
+            return 'x';
+        }
+        return element;
+    }).join('');
+}
+
+function putRandomDecorO(line) {
+    return line.split('').map(element => {
+        if (Math.random() > 0.9 && element == '*') {
+            return 'o';
+        }
+        return element;
+    }).join('');
+}
+
+function putRandomDecor(line) {
+	line = putRandomDecorX(line);
+	line = putRandomDecorO(line);
+	return (line);
+}
+
 function afficherEtage(hauteur, pointe_offset, espacement) {
 	if (pointe_offset == 0)
 		console.log(créerPremièreLigne(hauteur, espacement));
 	let line;
 	for (let i = 1 + pointe_offset ; i <= hauteur + pointe_offset; i++) {
 		line = ajouterEspaces(espacement) + créerLigneGauche(i, hauteur + pointe_offset) + '|' + créerLigneDroite(i - 1);
+		line = putRandomDecor(line);
 		console.log(line);
 	}
 }
