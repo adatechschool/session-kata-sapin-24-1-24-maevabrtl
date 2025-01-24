@@ -37,7 +37,7 @@ function créerPremièreLigne(hauteur, espacement) {
 
 function ajouterEspaces(espacement) {
 	let line = ''
-	for (let i = 0; i < espacement; i++)
+	for (let i = 1; i < espacement; i++)
 		line += ' '
 	return line;
 }
@@ -52,10 +52,46 @@ function afficherEtage(hauteur, pointe_offset, espacement) {
 	}
 }
 
-function afficherSapin(étages, hauteurEtages) {
-	for (let i = 0; i < étages; i++) {
-		afficherEtage(hauteurEtages, i, hauteurEtages - i);
+function ajouterDièses(taille) {
+	let line = ''
+	for (let i = 0; i < taille; i++)
+		line += '#'
+	return line;
+}
+
+function afficherTronc(largeurBase) {
+	const largeurTronc = 3;
+	let espacesTronc = Math.floor((largeurBase - largeurTronc) / 2) + 1;
+	let line;
+	for (let i = 0; i < largeurTronc; i++) {
+		line = ajouterEspaces(espacesTronc) + ajouterDièses(largeurTronc);
+		console.log(line);
 	}
 }
 
+function afficherSapin(étages, hauteurEtages) {
+	for (let i = 0; i < étages; i++) {
+		afficherEtage(hauteurEtages, i, étages - i);
+	}
+	let largeurBase = (hauteurEtages + étages - 1) * 2 + 1;
+	afficherTronc(largeurBase);
+	for (let i = 0; i < 5; i++)
+		console.log(`\n`);
+}
+
+afficherSapin(0, 0);
+afficherSapin(1, 1);
+afficherSapin(2, 2);
 afficherSapin(3, 3);
+afficherSapin(12, 12);
+afficherSapin(13, 13);
+afficherSapin(3, 7);
+afficherSapin(7, 3);
+afficherSapin(4, 7);
+afficherSapin(7, 4);
+afficherSapin(7, 7);
+afficherSapin(6, 2);
+afficherSapin(6, 8);
+afficherSapin(10, 2);
+afficherSapin(1, 10);
+afficherSapin(6, 2);
